@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f2f5;
+      margin: 0;
+    }
+
+    .card {
+      background-color: #FFC0CB;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 80%;
+      max-width: 800px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #patients_chart {
+      width: 100%;
+      height: 400px;
+      background-color: #FFC0CB;
+    }
+  </style>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable(<%= @patients_chart_data.to_json.html_safe %>);
+
+      var options = {
+        title: 'Patients Registered',
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        hAxis: {
+          title: ''
+        },
+        vAxis: {
+          title: ''
+        }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('patients_chart'));
+
+      chart.draw(data, options);
+    }
+  </script>
+</head>
+<body>
+  <div class="card">
+    <h1 style="color:white;">Patients Registered</h1>
+    <div id="patients_chart"></div>
+     <%= link_to 'Logout', logout_path, method: :delete, class: 'nav-link  text-light', data: { confirm: 'Are you sure?' } %>
+  </div>
+</body>
+</html>

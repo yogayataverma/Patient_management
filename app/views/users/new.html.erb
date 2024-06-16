@@ -1,0 +1,53 @@
+<div style="width: 50%; margin: 7% auto;">
+  <div class="card border-warning shadow" style="background-color: #FFC0CB;">
+    <div class="card-body">
+      <h1 class="card-title text-center">Sign Up</h1>
+
+      <%= form_with(model: @user, local: true, html: { class: "form" }) do |f| %>
+        <% if @user.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= f.label :username %>
+          <%= f.text_field :username, autofocus: true, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :role %>
+          <%= f.select :role, User::ROLES, {}, class: "form-control" %>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+
+        <div class="form-group text-center">
+          <%= f.submit 'Sign Up', class: 'btn btn' %>
+        </div>
+        
+        
+
+        <%= link_to 'Log In', new_session_path , class: 'btn btn' %>
+
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

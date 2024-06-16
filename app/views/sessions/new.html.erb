@@ -1,0 +1,26 @@
+<div style="width: 50%; margin: 7% auto;"><div style="width: 50%; margin: 7% auto;">
+<div class="card border-warning shadow" style="background-color: #FFC0CB;">
+
+    <div class="card-body">
+    <h1 class="card-title text-center">Login</h1>
+      <%= form_with(url: create_session_path, local: true) do |f| %>
+        <% if flash[:alert] %>
+          <div id="error_explanation" class="alert alert-danger">
+            <p><%= flash[:alert] %></p>
+          </div>
+        <% end %>
+        <div class="form-group">
+          <%= f.label :email %><br>
+          <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password %><br>
+          <%= f.password_field :password, class: 'form-control' %>
+        </div>
+        <div class="form-group text-center">
+          <%= f.submit 'Log in', class: 'btn btn' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

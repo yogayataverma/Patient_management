@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center" >
+  <div class="card border-warning shadow" style="background-color: #FFC0CB;width:50%;">
+    <div class="card-body">
+      <%= form_with(model: patient, url: patients_path, local: true) do |form| %>
+        <% if patient.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+            <h2><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+            <ul>
+              <% patient.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.label :first_name %>
+          <%= form.text_field :first_name, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :last_name %>
+          <%= form.text_field :last_name, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :date_of_birth %>
+          <%= form.date_field :date_of_birth, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :gender %>
+          <%= form.select :gender, [['Male', 'male'], ['Female', 'female'], ['Other', 'other']], {}, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :phone_number %>
+          <%= form.text_field :phone_number, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :email %>
+          <%= form.email_field :email, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :doctor %>
+          <%= form.text_field :doctor, class: "form-control" %>
+        </div>
+        <div class="form-group text-center">
+          <%= form.submit 'Create Patient', class: "btn btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

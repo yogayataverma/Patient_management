@@ -1,0 +1,57 @@
+<!-- app/views/dashboards/receptionist.html.erb -->
+
+<h1 style="text-align:center;margin:2%;color:white;">Receptionist Dashboard</h1>
+
+<nav class="navbar navbar-expand-lg navbar-secondary bg-secondary text-light">
+  <a class="navbar-brand text-light" href="#">Patient Management</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <%= link_to 'Add New Patient', new_patient_path, class: 'nav-link  text-light' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Logout', logout_path, method: :delete, class: 'nav-link  text-light', data: { confirm: 'Are you sure?' } %>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- List of Patients -->
+<div class="table-responsive center-table" style="width:95%;margin: 2%;">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date of Birth</th>
+        <th>Gender</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Doctor</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @patients.each do |patient| %>
+        <tr>
+          <td><%= patient.first_name %></td>
+          <td><%= patient.last_name %></td>
+          <td><%= patient.date_of_birth %></td>
+          <td><%= patient.gender %></td>
+          <td><%= patient.phone_number %></td>
+          <td><%= patient.email %></td>
+          <td><%= patient.doctor %></td>
+          <td>
+            <%= link_to 'Show', patient_path(patient), class: 'btn btn-info btn-sm mr-1' %>
+            <%= link_to 'Edit', edit_patient_path(patient), class: 'btn btn-warning btn-sm mr-1' %>
+            <%= button_to 'Delete', patient_path(patient), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm', form: { class: 'd-inline' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
